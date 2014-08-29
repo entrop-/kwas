@@ -238,12 +238,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 9, ../sass/screen.scss */
 .gallery {
   width: 100%;
+  overflow: hidden;
 }
-/* line 12, ../sass/screen.scss */
+/* line 13, ../sass/screen.scss */
 .gallery .element-item a {
   display: block;
 }
-/* line 14, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 .gallery .element-item a img {
   max-width: 100%;
 }

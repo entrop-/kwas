@@ -21,13 +21,15 @@ $hc = new HipChat\HipChat($token);
 //  echo " - $room->room_id = $room->name\n";
 //}
 
-    $posts =  $hc->get_rooms_history('517400');
-
+    $posts =  $hc->get_rooms_history('517400','recent');
+    $posts = array_reverse($posts);
+//echo '<pre>';var_dump($posts);
+//die();
     foreach ($posts as $post) {
         $msg = $post->message;
 
         $images = array();
-        //var_dump($msg);
+
         preg_match('!http://[^?#]+\.(?:jpe?g|png|gif)!Ui' , $msg , $images);
         //var_dump($images);
         if (!empty($images[0])) {

@@ -2,7 +2,11 @@
     "use strict";
     window.Kwas = window.Kwas || {
         init: function () {
+            this.prepareLayout();
             this.startLayout();
+            this.imageAction();
+        },
+        prepareLayout : function(){
 
         },
         startLayout: function(){
@@ -14,8 +18,14 @@
                   layoutMode: 'masonry'
 
                 });
-        }
+        },
+        imageAction : function() {
+            $(document).on('click','.element-item',function(e){
+                e.preventDefault();
 
+
+            });
+        }
 
     }
     $(window).load( function () {

@@ -10,11 +10,13 @@
 <body>
 <div class="gallery">
 <?php
-require 'lib/HipChat.php';
+require 'controller/Kwas/HipChat.php';
+require 'controller/Kwas/Db.php';
+require 'controller/Kwas/RoomCollection.php';
 require 'cfg/cfg.php';
 
 $token = TOKEN;
-$hc = new HipChat\HipChat($token);
+$hc = new Kwas\HipChat($token);
 
 // list rooms
 //foreach ($hc->get_rooms() as $room) {
@@ -23,8 +25,16 @@ $hc = new HipChat\HipChat($token);
 
     $posts =  $hc->get_rooms_history('517400','recent');
     $posts = array_reverse($posts);
-//echo '<pre>';var_dump($posts);
-//die();
+
+
+    $room = new Kwas\RoomCollection();
+
+    $latest_date = $collection->getTopDate();
+
+    print_r($latest_date);
+
+echo '<pre>';var_dump($posts);
+die();
     foreach ($posts as $post) {
         $msg = $post->message;
 

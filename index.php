@@ -27,14 +27,13 @@ $hc = new Kwas\HipChat($token);
     $posts = array_reverse($posts);
 
 
-    $room = new Kwas\RoomCollection();
+//    $room = new Kwas\RoomCollection();
+//
+//    $latest_date = $collection->getTopDate();
 
-    $latest_date = $collection->getTopDate();
+    //print_r($latest_date);
 
-    print_r($latest_date);
 
-echo '<pre>';var_dump($posts);
-die();
     foreach ($posts as $post) {
         $msg = $post->message;
 

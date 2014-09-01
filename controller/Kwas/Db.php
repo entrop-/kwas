@@ -1,6 +1,7 @@
 <?php
 
     namespace Kwas;
+    use PDO;
 
 class Db
 {

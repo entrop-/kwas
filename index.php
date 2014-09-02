@@ -39,7 +39,7 @@ $hc = new Kwas\HipChat($token);
 
         $images = array();
 
-        preg_match('!http://[^?#]+\.(?:jpe?g|png|gif)!Ui' , $msg , $images);
+        preg_match('!http://[^?#]+\.(?:jpe?g|png)!Ui' , $msg , $images);
         //var_dump($images);
         if (!empty($images[0])) {
             $img = $images[0];
@@ -52,7 +52,7 @@ $hc = new Kwas\HipChat($token);
         //            var_dump($my_image);
                     list($width, $height, $type, $attr) = $my_image;
 
-                    $landscape = '';
+                    $landscape = 'portrait';
                     if($width >= $height )
                         $landscape = 'landscape';
 

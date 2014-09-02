@@ -305,12 +305,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 13, ../sass/screen.scss */
 .gallery .element-item a {
   display: block;
+  position: relative;
 }
-/* line 15, ../sass/screen.scss */
+/* line 16, ../sass/screen.scss */
 .gallery .element-item a img {
   max-width: 100%;
 }
-/* line 19, ../sass/screen.scss */
+/* line 20, ../sass/screen.scss */
+.gallery .element-item a:hover:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  opacity: 0.1;
+  background: black;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+/* line 34, ../sass/screen.scss */
 .gallery .element-item.landscape {
   width: 50%;
   float: left;
@@ -325,7 +338,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-right: 0%;
     display: inline;
   }
-  /* line 24, ../sass/screen.scss */
+  /* line 39, ../sass/screen.scss */
   .gallery .element-item.landscape {
     width: 66.66667%;
     float: left;
@@ -341,7 +354,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-right: 0%;
     display: inline;
   }
-  /* line 30, ../sass/screen.scss */
+  /* line 45, ../sass/screen.scss */
   .gallery .element-item.landscape {
     width: 100%;
     float: left;
@@ -357,4 +370,21 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     margin-right: 0%;
     display: inline;
   }
+}
+/* line 54, ../sass/screen.scss */
+.gallery .okejka {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+}
+/* line 59, ../sass/screen.scss */
+.gallery .okejka:before {
+  content: '+1';
+  font-size: 30px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-family: Arial;
+  font-weight: bold;
 }

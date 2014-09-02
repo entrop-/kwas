@@ -43,7 +43,23 @@ $hc = new Kwas\HipChat($token);
         //var_dump($images);
         if (!empty($images[0])) {
             $img = $images[0];
-            echo '<div class="element-item span_3"><a href="#"><img src="'.$img.'" alt=""></a></div>';
+
+
+                if (@file_get_contents($img)){
+                    $my_image = array_values(getimagesize($img));
+
+        //            echo '<pre>';
+        //            var_dump($my_image);
+                    list($width, $height, $type, $attr) = $my_image;
+
+                    $landscape = '';
+                    if($width >= $height )
+                        $landscape = 'landscape';
+
+
+                    echo '<div class="element-item span-3 '.$landscape.'"><a href="#"><img src="'.$img.'" alt=""></a></div>';
+                }
+
         }
 
     }

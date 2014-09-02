@@ -1,0 +1,75 @@
+// ---------------------------------------------------------------------------
+// Partials
+
+// temporary
+@import "susy/support";
+@import "susy/units";
+
+// permanent
+@import "susy/settings";
+@import "susy/functions";
+@import "susy/grid";
+@import "susy/isolation";
+@import "susy/padding";
+@import "susy/margin";
+@import "susy/media";
+@import "susy/background";
+
+$total-columns: 12;
+$column-width: 78px;
+$gutter-width: 0px;
+$grid-padding: 0px;
+
+.container {
+  @include container();
+}
+
+
+.span-1,.span-2,.span-3,.span-4,.span-5,.span-6,
+.span-7,.span-8,.span-9,.span-10,.span-11,.span-12 {
+  &.important-last{
+    margin-right: 0!important;
+  }
+  @include box-sizing(border-box);
+}
+.span-1 {    @include span-columns(1,12);}
+.span-2 {    @include span-columns(2,12);}
+.span-3 {    @include span-columns(3,12);}
+.span-4 {    @include span-columns(4,12);}
+.span-5 {    @include span-columns(5,12);}
+.span-6 {    @include span-columns(6,12);}
+.span-7 {    @include span-columns(7,12);}
+.span-8 {    @include span-columns(8,12);}
+.span-9 {    @include span-columns(9,12);}
+.span-10 {    @include span-columns(10,12);}
+.span-11 {    @include span-columns(11,12);}
+.span-12 {    @include span-columns(12,12);}
+
+.span-3-8 {   @include span-columns(3,8);}
+.span-6-8 {   @include span-columns(6,8);}
+
+
+.offset-1 {    margin-left: percentage(1/12)}
+.offset-2 {    margin-left: percentage(2/12)}
+.offset-3 {    margin-left: percentage(3/12)}
+.offset-4 {    margin-left: percentage(4/12)}
+.offset-5 {    margin-left: percentage(5/12)}
+.offset-6 {    margin-left: percentage(6/12)}
+.offset-7 {    margin-left: percentage(7/12)}
+.offset-8 {    margin-left: percentage(8/12)}
+.offset-9 {    margin-left: percentage(9/12)}
+.offset-10 {    margin-left: percentage(10/12)}
+.offset-11 {    margin-left: percentage(11/12)}
+
+@media only screen and (min-width: 768px) {
+    .hide-on-small { display: initial; }
+    .show-on-small { display: none; }
+}
+@media only screen and (max-width: 767px) {
+    .hide-on-medium { display: none; }
+    .show-on-small { display: none; }
+}
+@media only screen and (max-width: 480px) {
+    .hide-on-small { display: none; }
+    .show-on-small { display: initial; }
+}

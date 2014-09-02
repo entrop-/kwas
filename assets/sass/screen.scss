@@ -4,7 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
-@import "grid";
+@import "susy";
 
 .gallery {
     width: 100%;
@@ -16,6 +16,17 @@
                 max-width: 100%;
             }
         }
-
+        @media only screen and (max-width: 980px) {
+            @include span-columns(4,12);
+        }
+        @media only screen and (max-width: 570px) {
+            @include span-columns(6,12);
+        }
+        @media only screen and (max-width: 420px) {
+            @include span-columns(12,12);
+        }
+        &.landscape {
+            @include span-columns(6,12);
+        }
     }
 }

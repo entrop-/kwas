@@ -10,13 +10,14 @@
 <body>
 <div class="gallery">
 <?php
-require 'controller/Kwas/HipChat.php';
-require 'controller/Kwas/Db.php';
+require 'lib/HipChat.php';
+require 'model/Db.php';
 require 'controller/Kwas/RoomCollection.php';
 require 'cfg/cfg.php';
 
 $token = TOKEN;
 $hc = new Kwas\HipChat($token);
+$hc->set_verify_ssl(false);
 
 // list rooms
 //foreach ($hc->get_rooms() as $room) {

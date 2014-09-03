@@ -1,3 +1,6 @@
+<?php
+require_once 'bootstrap.php';
+?>
 <!doctype html>
 <html lang="pl">
 <head>
@@ -10,40 +13,12 @@
 <body>
 <div class="gallery">
 <?php
-require_once 'bootstrap.php';
+$model = new Links();
 
-$hc = new HipChat(Config::HC_TOKEN);
-$hc->set_verify_ssl(false);
-
-// list rooms
-//foreach ($hc->get_rooms() as $room) {
-//  echo " - $room->room_id = $room->name\n";
-//}
-
-    $posts =  $hc->get_rooms_history('517400','recent');
-    $posts = array_reverse($posts);
-
-
-//    $room = new Kwas\RoomCollection();
-//
-//    $latest_date = $collection->getTopDate();
-
-    //print_r($latest_date);
-
-
-    foreach ($posts as $post) {
-        $msg = $post->message;
-
-        $images = array();
-
-        preg_match('!http://[^?#]+\.(?:jpe?g|png|gif)!Ui' , $msg , $images);
-        //var_dump($images);
-        if (!empty($images[0])) {
-            $img = $images[0];
-            echo '<div class="element-item span_3"><a href="#"><img src="'.$img.'" alt=""></a></div>';
-        }
-
-    }
+$links = $model->getAll();
+foreach ($links as $link) {
+    echo '<div class="element-item span_3"><a href="#"><img src="' . $link['url'] . '" alt=""></a></div>';
+}
 
 ?>
 </div>

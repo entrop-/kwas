@@ -5,14 +5,19 @@
  * Date: 02.09.14
  * Time: 22:46
  */
-namespace Kwas;
-require_once 'abstract.php';
+require_once dirname(__FILE__) . '/abstract.php';
 
 class Kwas_Gatherer_Script extends Kwas_Script_Abstract
 {
     public function run()
     {
-        //@todo: implement me
+        $posts = new Posts();
+        $links = new Links();
+
+        $urls = $posts->test();
+        foreach ($urls as $url) {
+            $links->addLink($url);
+        }
     }
 }
 

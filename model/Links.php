@@ -13,37 +13,58 @@
  */
 class Links
 {
-    //@todo: implement me
+    /** @var PDO */
+    protected $_db = null;
 
-    /*
-     * Legacy code @entrop
+    /**
+     * Constructor.
      */
-//    public function updatePost($post)
-//    {
-//
-//
-//        //print_r($data);
-//        $q = 'UPDATE images SET `title`=?, `art`=?, `categ`=?, `link`=?, `tags`=? WHERE id=? LIMIT 1';
-//        $st = $this->dbh->prepare($q);
-//        $st->execute();
-//
-//    }
-//
-//    public function getTopDate()
-//    {
-//        $q = 'SELECT post_time
-//	FROM `images`
-//	WHERE 1
-//	ORDER BY id DESC
-//	LIMIT 1
-//	';
-//
-//        $st = $this->dbh->prepare($q);
-//        $st->execute();
-//        while ($line = $st->fetch(PDO::FETCH_ASSOC)) {
-//            $result[] = $line;
-//        }
-//        return $result;
-//
-//    }
+    public function __construct()
+    {
+        $this->_db = Db::instance()->connection();
+    }
+
+    /**
+     * Adds new URL to repository.
+     *
+     * @param $url
+     * @return bool
+     */
+    public function addLink($url)
+    {
+        $insert = $this->_db->prepare("INSERT INTO `links` (`url`) VALUES (:url)");
+        $insert->bindParam('url', $url);
+
+        return $insert->execute();
+    }
+
+    /**
+     * Retrieves number of entries from repository.
+     *
+     * If no parameters are given all entries are
+     * fetched. Otherwise pagination is applied.
+     *
+     * @param null $pageSize
+     * @param null $pageNo
+     * @return array|null
+     */
+    public function getAll($pageSize = null, $pageNo = null)
+    {
+        $limit = '';
+        if (is_integer($pageSize) && $pageSize > 0) {
+            $pageNo = (is_integer($pageNo) && $pageNo > 0) ? $pageNo : 0;
+            $offset = ($pageNo - 1) * $pageSize;
+
+            $limit = sprintf(' LIMIT %d, %d', $offset, $pageSize);
+        }
+        $select = $this->_db->query("SELECT * FROM `links`" . $limit);
+        $select->execute();
+
+        $result = $select->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($result)) {
+            return $result;
+        }
+
+        return null;
+    }
 }

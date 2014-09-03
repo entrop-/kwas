@@ -5,7 +5,7 @@
  * Date: 02.09.14
  * Time: 22:48
  */
-namespace Kwas;
+require_once dirname(__FILE__) . '/../bootstrap.php';
 
 abstract class Kwas_Script_Abstract
 {

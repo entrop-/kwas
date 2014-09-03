@@ -10,13 +10,9 @@
 <body>
 <div class="gallery">
 <?php
-require 'lib/HipChat.php';
-require 'model/Db.php';
-require 'controller/Kwas/RoomCollection.php';
-require 'cfg/cfg.php';
+require_once 'bootstrap.php';
 
-$token = TOKEN;
-$hc = new Kwas\HipChat($token);
+$hc = new HipChat(Config::HC_TOKEN);
 $hc->set_verify_ssl(false);
 
 // list rooms

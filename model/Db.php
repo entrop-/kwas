@@ -1,50 +1,76 @@
 <?php
-namespace Kwas;
-use PDO;
-
+/**
+ * Class Db
+ *
+ * Wrapper for database connection. Implements singleton pattern.
+ */
 class Db
 {
+    /** @var string */
+    protected $_host = null;
+    /** @var string */
+    protected $_user = null;
+    /** @var string */
+    protected $_password = null;
+    /** @var string */
+    protected $_dbName = null;
+    /** @var PDO */
+    protected $_con = null;
+    /** @var bool */
+    protected $_installed = true;
 
-    //protected $dbh;
+    /** @var Db */
+    static private $_instance = null;
 
-    public function __construct()
-    {
-        $this->dbh = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-        $this->dbh->query('SET NAMES UTF8');
-    }
-
-    /*
-     * compares last date with db date
+    /**
+     * Reads DB config, currently from constants
+     * defined in CFG file.
      */
-
-
-    public function updatePost($post)
+    protected function _readDbConfig()
     {
-
-
-        //print_r($data);
-        $q = 'UPDATE images SET `title`=?, `art`=?, `categ`=?, `link`=?, `tags`=? WHERE id=? LIMIT 1';
-        $st = $this->dbh->prepare($q);
-        $st->execute();
-
+        $this->_host = Config::DB_HOST;
+        $this->_user = Config::DB_USER;
+        $this->_password = Config::DB_PASS;
+        $this->_dbName = Config::DB_NAME;
     }
 
-    public function getTopDate()
+    /**
+     * Constructor.
+     */
+    protected function __construct()
     {
-        $q = 'SELECT post_time
-	FROM `images`
-	WHERE 1
-	ORDER BY id DESC
-	LIMIT 1
-	';
+        $this->_readDbConfig();
 
-        $st = $this->dbh->prepare($q);
-        $st->execute();
-        while ($line = $st->fetch(PDO::FETCH_ASSOC)) {
-            $result[] = $line;
+        $this->_con = new PDO(
+            'mysql:host=' . $this->_host . ';dbname=' . $this->_dbName,
+            $this->_user,
+            $this->_password
+        );
+        $this->_con->exec('SET NAMES UTF8');
+    }
+
+    /**
+     * Fetches Db instance. Creates a new instance on
+     * first call.
+     *
+     * @return Db
+     */
+    public static function instance()
+    {
+        if (static::$_instance === null) {
+            static::$_instance = new static;
         }
-        return $result;
 
+        return static::$_instance;
     }
 
+    /**
+     * PDO connection getter.
+     *
+     * @return PDO
+     */
+    public function connection()
+    {
+        return $this->_con;
+    }
 }

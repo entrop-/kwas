@@ -387,4 +387,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   left: 0px;
   font-family: Arial;
   font-weight: bold;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+  color: darkgoldenrod;
+}
+/* line 70, ../sass/screen.scss */
+.gallery .okejka.ten:before {
+  left: -10px;
+  content: '+10';
+  color: orange;
+}
+/* line 75, ../sass/screen.scss */
+.gallery .okejka.hundred:before {
+  left: -15px;
+  content: '+100';
+  color: yellow;
+  text-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+}
+/* line 81, ../sass/screen.scss */
+.gallery .okejka.max:before {
+  left: -125px;
+  content: '+99999999';
+  color: red;
+  text-shadow: 0px 0px 20px #ffdd00;
+  font-size: 50px;
 }

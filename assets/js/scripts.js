@@ -26,24 +26,23 @@
             $(document).on('click','.element-item a',function(e){
                 e.preventDefault();
 
-                if (e.target != this){
-                    this.counter = 0;
-                    console.log(e.target);
+                if (!e.target.cnt){
+                    e.target.cnt =0;
                 }
 
-                this.$counter++;
-                console.log(this.counter);
+                e.target.cnt++;
+                console.log(e.target.cnt);
                 var $class='okejka';
 
-                if(this.counter > 5){
+                if(e.target.cnt > 5){
                     $class = 'okejka ten';
                 }
-                if (this.counter > 15 ){
+                if (e.target.cnt > 15 ){
                     $class = 'okejka hundred';
                 }
-                if (this.counter >= 25 ){
+                if (e.target.cnt >= 25 ){
                     $class = 'okejka max';
-                    this.counter = 100;
+                    e.target.cnt = 100;
                 }
                 $(this).prepend('<div class="'+$class+'"></div>');
 
@@ -53,7 +52,7 @@
                 },1000,function(){
                     $(this).remove();
                     setTimeout(function(){
-                       this.counter --;
+                       e.target.cnt--;
                     }, 3000);
                 });
                 //todo ajax

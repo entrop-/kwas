@@ -4,7 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
-@import "grid";
+@import "susy";
 
 .gallery {
     width: 100%;
@@ -12,10 +12,78 @@
     .element-item {
         a {
             display: block;
+            position: relative;
             img {
                 max-width: 100%;
             }
+            &:hover {
+                &:before {
+                    content: '';
+                    position: absolute;
+                    z-index: 1;
+                    opacity: 0.1;
+                    background: black;
+                    top: 0px;
+                    bottom: 0px;
+                    left: 0px;
+                    right: 0px;
+                }
+            }
         }
 
+        &.landscape {
+            @include span-columns(6,12);
+        }
+        @media only screen and (max-width: 980px) {
+            @include span-columns(4,12);
+            &.landscape {
+                @include span-columns(8,12);
+            }
+        }
+        @media only screen and (max-width: 570px) {
+            @include span-columns(6,12);
+            &.landscape {
+                @include span-columns(12,12);
+            }
+        }
+        @media only screen and (max-width: 420px) {
+            @include span-columns(12,12);
+        }
+
+    }
+    .okejka {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        &:before {
+            content: '+1';
+            font-size: 30px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            font-family: Arial;
+            font-weight: bold;
+            text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+            color: darkgoldenrod;
+        }
+        &.ten:before {
+            left: -10px;
+            content: '+10';
+            color: orange;
+        }
+        &.hundred:before {
+            left: -15px;
+            content: '+100';
+            color: yellow;
+            text-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
+        }
+        &.max:before {
+            left: -125px;
+            content: '+99999999';
+            color: red;
+            text-shadow: 0px 0px 20px rgba(255, 221, 0, 1);
+            font-size: 50px;
+        }
     }
 }

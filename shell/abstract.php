@@ -9,7 +9,7 @@ require_once dirname(__FILE__) . '/../bootstrap.php';
 
 abstract class Kwas_Script_Abstract
 {
-    protected $_args = [];
+    protected $_args = array();
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ abstract class Kwas_Script_Abstract
 
         $arg = null;
         for ($i = 1; $i < $argc; $i++) {
-            $matches = [];
+            $matches = array();
             preg_match('/--([a-zA-Z]+[0-9]*)/', $argv[$i], $matches);
             if (!empty($matches)) {
                 $arg = $matches[1];

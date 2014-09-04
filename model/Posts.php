@@ -32,7 +32,7 @@ class Posts
         $posts =  $this->_hc->get_rooms_history('517400','recent');
         $posts = array_reverse($posts);
 
-        $urls = [];
+        $urls = array();
         foreach ($posts as $post) {
             $msg = $post->message;
             $images = array();

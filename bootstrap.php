@@ -17,7 +17,7 @@ $rootPath = dirname(__FILE__);
 define('ROOT_PATH', $rootPath);
 
 spl_autoload_register(function ($className) {
-    $includeDirs = ['app', 'cfg', 'lib', 'model'];
+    $includeDirs = array('app', 'cfg', 'lib', 'model');
     foreach ($includeDirs as $dir) {
         $path = ROOT_PATH . DS . $dir . DS  . $className . '.php';
         if (file_exists($path)) {

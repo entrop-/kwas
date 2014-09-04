@@ -25,24 +25,31 @@ class Posts
         $this->_hc->set_verify_ssl(false);
     }
 
-    public function test()
+    /**
+     * Retrieves images from recent chat history.
+     *
+     * Returned data contains an array of images,
+     * each row containing image URL and posting
+     * date.
+     *
+     * @return array
+     */
+    public function fetchRecentImages()
     {
-        //@todo: test method - for removal
-
         $posts =  $this->_hc->get_rooms_history('517400','recent');
         $posts = array_reverse($posts);
 
-        $urls = array();
+        $images = array();
         foreach ($posts as $post) {
-            $msg = $post->message;
-            $images = array();
-            preg_match('!http://[^?#]+\.(?:jpe?g|png|gif)!Ui' , $msg , $images);
-            if (!empty($images[0])) {
-                $img = $images[0];
-                $urls[] = $img;
+            $url = Image::parseImageUrl($post->message);
+            if ($url !== null) {
+                $images[] = array(
+                    'url' => $url,
+                    'date' => $post->date
+                );
             }
         }
 
-        return $urls;
+        return $images;
     }
 }

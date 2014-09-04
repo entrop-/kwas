@@ -14,9 +14,9 @@ class Kwas_Gatherer_Script extends Kwas_Script_Abstract
         $posts = new Posts();
         $links = new Links();
 
-        $urls = $posts->test();
-        foreach ($urls as $url) {
-            $links->addLink($url);
+        $images = $posts->fetchRecentImages();
+        foreach ($images as $image) {
+            $links->addLink($image['url'], $image['date']);
         }
     }
 }

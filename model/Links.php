@@ -49,12 +49,21 @@ class Links
      * Adds new URL to repository.
      *
      * @param $url
+     * @param null $date
      * @return bool
      */
-    public function addLink($url)
+    public function addLink($url, $date = null)
     {
-        $insert = $this->_db->prepare("INSERT INTO `links` (`url`) VALUES (:url)");
+        $dimensions = Image::getImageDimensions($url);
+
+        $width = $dimensions !== null ? $dimensions['width'] : null;
+        $height = $dimensions !== null ? $dimensions['height'] : null;
+
+        $insert = $this->_db->prepare($sql = "INSERT INTO `links` (`url`, `date`, `width`, `height`) VALUES (:url, :date, :width, :height)");
         $insert->bindParam('url', $url);
+        $insert->bindParam('date', $date);
+        $insert->bindParam('width', $width);
+        $insert->bindParam('height', $height);
 
         return $insert->execute();
     }

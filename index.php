@@ -1,7 +1,6 @@
 <?php
 require_once 'bootstrap.php';
-?>
-<!doctype html>
+?><!doctype html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +16,9 @@ $model = new Links();
 
 $links = $model->getAll();
 foreach ($links as $link) {
-    echo '<div class="element-item span_3"><a href="#"><img src="' . $link['url'] . '" alt=""></a></div>';
+    echo '<div class="element-item span-3';
+    echo $link['width'] <= $link['height'] ? ' portrait' : ' landscape';
+    echo '"><a href="#"><img src="' . $link['url'] . '" alt=""></a></div>';
 }
 
 ?>

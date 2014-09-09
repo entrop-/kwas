@@ -6,6 +6,7 @@
             this.startLayout();
             this.okejka();
             this.fDisableSelection();
+            this.fLazy();
         },
         prepareLayout : function(){
 
@@ -13,12 +14,9 @@
         startLayout: function(){
             var $container = $('.gallery');
             // init
-            $container.isotope({
-                  // options
-                  itemSelector: '.element-item',
-                  layoutMode: 'masonry'
-
-                });
+            $container.masonry({
+              itemSelector: '.element-item'
+            });
         },
         okejka: function() {
             var $counter = 0;
@@ -67,8 +65,38 @@
             };
             $('img').disableSelection();
             $('a').disableSelection();
-        }
+        },
+        fLazy : function() {
 
+            jQuery(window).scroll(function () {
+
+                var scrollpos = $(document).scrollTop();
+                var docH = $(document).height();
+                var winH = $(window).height();
+                var page = $('.gallery').data('page')+1;
+                var url = 'ajax.php?page='+page;
+                if (scrollpos + winH >= docH){
+                    $.ajax({
+                        url: url,
+                        method: 'get',
+                        success: function(data){
+                            //var nodes = $.parseHTML(data);
+                            var el = $(data);
+//                            var items= [];
+//                            $(nodes).each(function(i){
+//                               items+=$(this);
+//                            });
+//                            console.dir(items);
+                            $('.gallery').append(el).masonry('appended',el,true).masonry( 'layout' );
+
+                            $('.gallery').data('page',page);
+                        }
+                    });
+                }
+
+
+            });
+        }
     }
     $(window).load( function () {
         window.Kwas.init();

@@ -10,11 +10,14 @@
     width: 100%;
     overflow: hidden;
     .element-item {
+
         a {
             display: block;
             position: relative;
+            padding: 5px;
+            border: 1px solid #ccc;
             img {
-                max-width: 100%;
+                width: 100%;
             }
             &:hover {
                 &:before {
@@ -86,4 +89,9 @@
             font-size: 50px;
         }
     }
+}
+.spinner {
+    width: 100%;
+    text-align: center;
+
 }

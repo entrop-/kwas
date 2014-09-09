@@ -81,8 +81,8 @@ class Links
     public function getAll($pageSize = null, $pageNo = null)
     {
         $limit = '';
-        if (is_integer($pageSize) && $pageSize > 0) {
-            $pageNo = (is_integer($pageNo) && $pageNo > 0) ? $pageNo : 0;
+        if (is_numeric($pageSize) && $pageSize > 0) {
+            $pageNo = (is_numeric($pageNo) && $pageNo > 0) ? $pageNo : 0;
             $offset = ($pageNo - 1) * $pageSize;
 
             $limit = sprintf(' LIMIT %d, %d', $offset, $pageSize);
@@ -90,7 +90,7 @@ class Links
 
         $order = " ORDER BY `date` " . ($this->_fetchType == self::FETCH_NEWEST ? "DESC" : "ASC");
 
-        $select = $this->_db->query("SELECT * FROM `links`" . $limit . $order);
+        $select = $this->_db->query("SELECT * FROM `links`" . $order . $limit );
         $select->execute();
 
         $result = $select->fetchAll(PDO::FETCH_ASSOC);
